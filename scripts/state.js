@@ -1,0 +1,1 @@
+// Estado global da aplicação será estruturado no Épico 3.

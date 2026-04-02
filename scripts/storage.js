@@ -1,0 +1,1 @@
+// Responsável pela persistência com localStorage no Épico 6.

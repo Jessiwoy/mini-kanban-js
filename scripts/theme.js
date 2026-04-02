@@ -1,0 +1,1 @@
+// Responsável pela troca de tema claro/escuro no Épico 8.
