@@ -1,4 +1,12 @@
-import { addTask, updateTask, removeTask, TASK_STATUS } from "./state.js";
+import {
+  addTask,
+  getTasks,
+  removeTask,
+  setTasks,
+  TASK_STATUS,
+  updateTask,
+} from "./state.js";
+import { saveTasks, loadTasks } from "./storage.js";
 import { generateId, isValidTaskTitle, sanitizeText } from "./utils.js";
 
 export function createTask(title) {
@@ -17,6 +25,7 @@ export function createTask(title) {
   };
 
   addTask(newTask);
+  saveTasks(getTasks());
 
   return {
     success: true,
@@ -36,9 +45,17 @@ export function editTask(taskId, newTitle) {
     title: sanitizeText(newTitle),
   });
 
+  saveTasks(getTasks());
+
   return { success: true };
 }
 
 export function deleteTask(taskId) {
   removeTask(taskId);
+  saveTasks(getTasks());
+}
+
+export function initializeTasks() {
+  const storedTasks = loadTasks();
+  setTasks(storedTasks);
 }

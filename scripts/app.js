@@ -1,5 +1,5 @@
 import { renderBoard, createEditForm } from "./render.js";
-import { createTask, editTask, deleteTask } from "./tasks.js";
+import { createTask, deleteTask, editTask, initializeTasks } from "./tasks.js";
 import { getTasks } from "./state.js";
 
 const taskForm = document.querySelector(".task-form");
@@ -17,6 +17,7 @@ function handleCreateTask(event) {
   }
 
   taskTitleInput.value = "";
+  taskTitleInput.focus();
   renderBoard();
 }
 
@@ -48,7 +49,7 @@ function handleBoardClick(event) {
 
 function startEditing(card, taskId) {
   const tasks = getTasks();
-  const task = tasks.find((t) => t.id === taskId);
+  const task = tasks.find((currentTask) => currentTask.id === taskId);
 
   if (!task) return;
 
@@ -65,8 +66,9 @@ function handleEditSubmit(event) {
   const input = form.querySelector("input");
   const card = form.closest(".task-card");
 
-  const taskId = card.dataset.taskId;
+  if (!input || !card) return;
 
+  const taskId = card.dataset.taskId;
   const result = editTask(taskId, input.value);
 
   if (!result.success) {
@@ -86,4 +88,5 @@ if (board) {
   board.addEventListener("submit", handleEditSubmit);
 }
 
+initializeTasks();
 renderBoard();
