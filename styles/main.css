@@ -364,3 +364,30 @@ body[data-theme="light"] .task-card__actions button {
   border: 1px solid var(--light-border);
   color: var(--light-text);
 }
+
+.task-card--dragging {
+  opacity: 0.55;
+}
+
+.task-card--done {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.column__body {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.column__body--drag-over {
+  transform: scale(1.01);
+}
+
+body[data-theme="dark"] .column__body--drag-over {
+  background-color: rgba(198, 168, 255, 0.08);
+  border-color: rgba(198, 168, 255, 0.42);
+}
+
+body[data-theme="light"] .column__body--drag-over {
+  background-color: rgba(177, 140, 255, 0.12);
+  border-color: rgba(177, 140, 255, 0.45);
+}

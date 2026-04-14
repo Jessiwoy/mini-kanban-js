@@ -1,4 +1,4 @@
-import { COLUMN_ORDER, getTasks } from "./state.js";
+import { COLUMN_ORDER, getTasks, TASK_STATUS } from "./state.js";
 
 const COLUMN_TITLES = {
   todo: "A fazer",
@@ -17,13 +17,9 @@ export function renderBoard() {
 
 function renderColumn(status, tasks) {
   const columnBody = document.querySelector(`[data-column-body="${status}"]`);
-  const columnElement = document.querySelector(
-    `[data-column-status="${status}"]`,
-  );
+  const columnElement = document.querySelector(`[data-column-status="${status}"]`);
 
-  if (!columnBody || !columnElement) {
-    return;
-  }
+  if (!columnBody || !columnElement) return;
 
   const columnCount = columnElement.querySelector(".column__count");
   const filteredTasks = tasks.filter((task) => task.status === status);
@@ -50,6 +46,11 @@ function createTaskCard(task) {
   const article = document.createElement("article");
   article.className = "task-card";
   article.dataset.taskId = task.id;
+  article.draggable = task.status !== TASK_STATUS.DONE;
+
+  if (task.status === TASK_STATUS.DONE) {
+    article.classList.add("task-card--done");
+  }
 
   article.innerHTML = `
     <div class="task-card__content">
@@ -57,8 +58,8 @@ function createTaskCard(task) {
     </div>
 
     <div class="task-card__actions">
-      <button data-action="edit">Editar</button>
-      <button data-action="delete">Excluir</button>
+      <button type="button" data-action="edit">Editar</button>
+      <button type="button" data-action="delete">Excluir</button>
     </div>
   `;
 

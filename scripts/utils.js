@@ -14,6 +14,10 @@ export function isValidTaskTitle(title) {
 }
 
 export function canMoveTask(currentStatus, nextStatus) {
+  if (currentStatus === TASK_STATUS.DONE) {
+    return false;
+  }
+
   if (
     currentStatus === TASK_STATUS.PENDING &&
     nextStatus === TASK_STATUS.DONE

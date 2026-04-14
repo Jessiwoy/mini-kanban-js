@@ -7,7 +7,7 @@ import {
   updateTask,
 } from "./state.js";
 import { saveTasks, loadTasks } from "./storage.js";
-import { generateId, isValidTaskTitle, sanitizeText } from "./utils.js";
+import { canMoveTask, generateId, isValidTaskTitle, sanitizeText } from "./utils.js";
 
 export function createTask(title) {
   if (!isValidTaskTitle(title)) {
@@ -58,4 +58,40 @@ export function deleteTask(taskId) {
 export function initializeTasks() {
   const storedTasks = loadTasks();
   setTasks(storedTasks);
+}
+
+export function moveTask(taskId, nextStatus) {
+  const tasks = getTasks();
+  const task = tasks.find((currentTask) => currentTask.id === taskId);
+
+  if (!task) {
+    return {
+      success: false,
+      message: "Tarefa não encontrada.",
+    };
+  }
+
+  if (!canMoveTask(task.status, nextStatus)) {
+    return {
+      success: false,
+      message:
+        task.status === TASK_STATUS.PENDING && nextStatus === TASK_STATUS.DONE
+          ? "Tarefas pendentes precisam voltar para Em andamento antes de concluir."
+          : "Essa tarefa não pode mais ser movida.",
+    };
+  }
+
+  if (task.status === nextStatus) {
+    return {
+      success: true,
+      unchanged: true,
+    };
+  }
+
+  updateTask(taskId, { status: nextStatus });
+  saveTasks(getTasks());
+
+  return {
+    success: true,
+  };
 }
