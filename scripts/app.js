@@ -1,1 +1,1 @@
-console.log("Mini Kanban iniciado");
+console.log("Base visual do Mini Kanban carregada.");
