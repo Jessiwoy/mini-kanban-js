@@ -1,14 +1,14 @@
 export const TASK_STATUS = {
-  PENDING: "pending",
+  TODO: "todo",
   IN_PROGRESS: "in_progress",
-  REVIEW: "review",
+  PENDING: "pending",
   DONE: "done",
 };
 
 export const COLUMN_ORDER = [
-  TASK_STATUS.PENDING,
+  TASK_STATUS.TODO,
   TASK_STATUS.IN_PROGRESS,
-  TASK_STATUS.REVIEW,
+  TASK_STATUS.PENDING,
   TASK_STATUS.DONE,
 ];
 

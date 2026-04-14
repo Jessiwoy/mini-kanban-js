@@ -1,93 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mini Kanban</title>
-  <link rel="stylesheet" href="./styles/main.css" />
-</head>
-<body data-theme="dark">
-  <div class="app">
-    <header class="app-header">
-      <div class="app-header__content">
-        <div>
-          <p class="app-header__eyebrow">Organize seu fluxo</p>
-          <h1>Mini Kanban</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Kanban</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="app">
+      <header class="app-header">
+        <div class="app-header__content">
+          <div>
+            <p class="app-header__eyebrow">Organize seu fluxo</p>
+            <h1>Mini Kanban</h1>
+          </div>
+
+          <button
+            class="theme-toggle"
+            type="button"
+            aria-label="Alternar tema"
+            title="Alternar tema"
+          >
+            Tema
+          </button>
         </div>
+      </header>
 
-        <button
-          class="theme-toggle"
-          type="button"
-          aria-label="Alternar tema"
-          title="Alternar tema"
-        >
-          Tema
-        </button>
-      </div>
-    </header>
+      <main class="app-main">
+        <section class="task-form-section" aria-label="Criar nova tarefa">
+          <form class="task-form">
+            <label class="sr-only" for="task-title">Título da tarefa</label>
+            <input
+              id="task-title"
+              name="task-title"
+              type="text"
+              placeholder="Digite uma nova tarefa"
+            />
+            <button type="submit">Adicionar</button>
+          </form>
+        </section>
 
-    <main class="app-main">
-      <section class="task-form-section" aria-label="Criar nova tarefa">
-        <form class="task-form">
-          <label class="sr-only" for="task-title">Título da tarefa</label>
-          <input
-            id="task-title"
-            name="task-title"
-            type="text"
-            placeholder="Digite uma nova tarefa"
-          />
-          <button type="submit">Adicionar</button>
-        </form>
-      </section>
+        <section class="board" aria-label="Quadro kanban">
+          <article class="column column--todo" data-column-status="todo">
+            <header class="column__header">
+              <h2>A fazer</h2>
+              <span class="column__count">0</span>
+            </header>
 
-      <section class="board" aria-label="Quadro kanban">
-        <article class="column column--pending">
-          <header class="column__header">
-            <h2>Pendente</h2>
-            <span class="column__count">0</span>
-          </header>
+            <div class="column__body" data-column-body="todo">
+              <p class="empty-state">Nenhuma tarefa por aqui.</p>
+            </div>
+          </article>
 
-          <div class="column__body">
-            <p class="empty-state">Nenhuma tarefa por aqui.</p>
-          </div>
-        </article>
+          <article
+            class="column column--progress"
+            data-column-status="in_progress"
+          >
+            <header class="column__header">
+              <h2>Em andamento</h2>
+              <span class="column__count">0</span>
+            </header>
 
-        <article class="column column--progress">
-          <header class="column__header">
-            <h2>Em andamento</h2>
-            <span class="column__count">0</span>
-          </header>
+            <div class="column__body" data-column-body="in_progress">
+              <p class="empty-state">Nenhuma tarefa por aqui.</p>
+            </div>
+          </article>
 
-          <div class="column__body">
-            <p class="empty-state">Nenhuma tarefa por aqui.</p>
-          </div>
-        </article>
+          <article class="column column--pending" data-column-status="pending">
+            <header class="column__header">
+              <h2>Pendente</h2>
+              <span class="column__count">0</span>
+            </header>
 
-        <article class="column column--review">
-          <header class="column__header">
-            <h2>Em revisão</h2>
-            <span class="column__count">0</span>
-          </header>
+            <div class="column__body" data-column-body="pending">
+              <p class="empty-state">Nenhuma tarefa por aqui.</p>
+            </div>
+          </article>
 
-          <div class="column__body">
-            <p class="empty-state">Nenhuma tarefa por aqui.</p>
-          </div>
-        </article>
+          <article class="column column--done" data-column-status="done">
+            <header class="column__header">
+              <h2>Concluído</h2>
+              <span class="column__count">0</span>
+            </header>
 
-        <article class="column column--done">
-          <header class="column__header">
-            <h2>Concluído</h2>
-            <span class="column__count">0</span>
-          </header>
+            <div class="column__body" data-column-body="done">
+              <p class="empty-state">Nenhuma tarefa por aqui.</p>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
 
-          <div class="column__body">
-            <p class="empty-state">Nenhuma tarefa por aqui.</p>
-          </div>
-        </article>
-      </section>
-    </main>
-  </div>
-
-  <script type="module" src="./scripts/app.js"></script>
-</body>
+    <script type="module" src="./scripts/app.js"></script>
+  </body>
 </html>

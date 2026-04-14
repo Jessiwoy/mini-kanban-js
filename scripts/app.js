@@ -1,10 +1,30 @@
-import { appState, TASK_STATUS } from "./state.js";
-import { generateId, isValidTaskTitle, canMoveTask } from "./utils.js";
+import { renderBoard } from "./render.js";
+import { createTask } from "./tasks.js";
 
-console.log("Estado inicial da aplicação:", appState);
-console.log("Exemplo de ID gerado:", generateId());
-console.log("Título válido:", isValidTaskTitle("  Estudar JavaScript  "));
-console.log(
-  "Movimento permitido de Pendente para Concluído:",
-  canMoveTask(TASK_STATUS.PENDING, TASK_STATUS.DONE)
-);
+const taskForm = document.querySelector(".task-form");
+const taskTitleInput = document.querySelector("#task-title");
+
+function handleCreateTask(event) {
+  event.preventDefault();
+
+  if (!taskTitleInput) {
+    return;
+  }
+
+  const result = createTask(taskTitleInput.value);
+
+  if (!result.success) {
+    alert(result.message);
+    return;
+  }
+
+  taskTitleInput.value = "";
+  renderBoard();
+  taskTitleInput.focus();
+}
+
+if (taskForm) {
+  taskForm.addEventListener("submit", handleCreateTask);
+}
+
+renderBoard();

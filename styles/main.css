@@ -1,15 +1,11 @@
-/* =========================
-   Reset
-========================= */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
-   Variáveis
-========================= */
+/* Variáveis */
 :root {
   --font-family: Arial, sans-serif;
   --radius-sm: 12px;
@@ -38,9 +34,7 @@
   --light-accent-strong: #b18cff;
 }
 
-/* =========================
-   Base
-========================= */
+/* Base */
 html {
   font-size: 16px;
 }
@@ -88,9 +82,7 @@ input {
   clip: rect(0, 0, 0, 0);
 }
 
-/* =========================
-   Layout
-========================= */
+/* Layout */
 .app {
   width: min(100%, 1200px);
   margin: 0 auto;
@@ -286,9 +278,7 @@ body[data-theme="light"] .empty-state {
   color: var(--light-text-muted);
 }
 
-/* =========================
-   Responsividade
-========================= */
+/* Responsividade */
 @media (min-width: 768px) {
   .app {
     padding: 32px 24px 48px;
@@ -317,4 +307,25 @@ body[data-theme="light"] .empty-state {
   .column__body {
     min-height: 320px;
   }
+}
+
+.task-card {
+  padding: 14px;
+  border-radius: 16px;
+}
+
+body[data-theme="dark"] .task-card {
+  background-color: var(--dark-surface-2);
+  border: 1px solid rgba(198, 168, 255, 0.16);
+}
+
+body[data-theme="light"] .task-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(177, 140, 255, 0.22);
+}
+
+.task-card__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
