@@ -7,10 +7,12 @@ import {
   moveTask,
 } from "./tasks.js";
 import { getTasks } from "./state.js";
+import { initializeTheme, toggleTheme } from "./theme.js";
 
 const taskForm = document.querySelector(".task-form");
 const taskTitleInput = document.querySelector("#task-title");
 const board = document.querySelector(".board");
+const themeToggleButton = document.querySelector(".theme-toggle");
 
 function handleCreateTask(event) {
   event.preventDefault();
@@ -195,5 +197,10 @@ if (board) {
   board.addEventListener("drop", handleDrop);
 }
 
+if (themeToggleButton) {
+  themeToggleButton.addEventListener("click", toggleTheme);
+}
+
+initializeTheme();
 initializeTasks();
 renderBoard();

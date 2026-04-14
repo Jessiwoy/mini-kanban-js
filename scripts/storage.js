@@ -1,11 +1,12 @@
-const STORAGE_KEY = "mini-kanban:tasks";
+const TASKS_STORAGE_KEY = "mini-kanban:tasks";
+const THEME_STORAGE_KEY = "mini-kanban:theme";
 
 export function saveTasks(tasks) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
 }
 
 export function loadTasks() {
-  const storedTasks = localStorage.getItem(STORAGE_KEY);
+  const storedTasks = localStorage.getItem(TASKS_STORAGE_KEY);
 
   if (!storedTasks) {
     return [];
@@ -23,4 +24,12 @@ export function loadTasks() {
     console.error("Erro ao carregar tarefas do localStorage:", error);
     return [];
   }
+}
+
+export function saveTheme(theme) {
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
+}
+
+export function loadTheme() {
+  return localStorage.getItem(THEME_STORAGE_KEY);
 }

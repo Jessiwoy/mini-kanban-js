@@ -124,6 +124,9 @@ body[data-theme="light"] .app-header__eyebrow {
   padding: 10px 16px;
   border-radius: 999px;
   transition: 0.2s ease;
+  min-width: 110px;
+  text-align: center;
+  font-weight: 600;
 }
 
 body[data-theme="dark"] .theme-toggle {
