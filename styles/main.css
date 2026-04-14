@@ -329,3 +329,38 @@ body[data-theme="light"] .task-card {
   font-weight: 600;
   line-height: 1.4;
 }
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-card__actions button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.task-card--editing input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+body[data-theme="dark"] .task-card__actions button {
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text);
+}
+
+body[data-theme="light"] .task-card__actions button {
+  background-color: var(--light-surface);
+  border: 1px solid var(--light-border);
+  color: var(--light-text);
+}

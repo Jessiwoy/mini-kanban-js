@@ -17,7 +17,9 @@ export function renderBoard() {
 
 function renderColumn(status, tasks) {
   const columnBody = document.querySelector(`[data-column-body="${status}"]`);
-  const columnElement = document.querySelector(`[data-column-status="${status}"]`);
+  const columnElement = document.querySelector(
+    `[data-column-status="${status}"]`,
+  );
 
   if (!columnBody || !columnElement) {
     return;
@@ -50,7 +52,32 @@ function createTaskCard(task) {
   article.dataset.taskId = task.id;
 
   article.innerHTML = `
-    <h3 class="task-card__title">${task.title}</h3>
+    <div class="task-card__content">
+      <h3 class="task-card__title">${task.title}</h3>
+    </div>
+
+    <div class="task-card__actions">
+      <button data-action="edit">Editar</button>
+      <button data-action="delete">Excluir</button>
+    </div>
+  `;
+
+  return article;
+}
+
+export function createEditForm(task) {
+  const article = document.createElement("article");
+  article.className = "task-card task-card--editing";
+  article.dataset.taskId = task.id;
+
+  article.innerHTML = `
+    <form class="task-edit-form">
+      <input type="text" value="${task.title}" />
+      <div class="task-card__actions">
+        <button type="submit">Salvar</button>
+        <button type="button" data-action="cancel">Cancelar</button>
+      </div>
+    </form>
   `;
 
   return article;
