@@ -8,6 +8,7 @@ import {
 } from "./tasks.js";
 import { getTasks } from "./state.js";
 import { initializeTheme, toggleTheme } from "./theme.js";
+import { canMoveTask } from "./utils.js";
 
 const taskForm = document.querySelector(".task-form");
 const taskTitleInput = document.querySelector("#task-title");
@@ -98,6 +99,7 @@ function handleDragStart(event) {
   event.dataTransfer.effectAllowed = "move";
 
   card.classList.add("task-card--dragging");
+  applyDropZoneStates(card.dataset.taskId);
 }
 
 function handleDragEnd(event) {
@@ -108,6 +110,7 @@ function handleDragEnd(event) {
   }
 
   clearDropHighlights();
+  clearDropZoneStates();
 }
 
 function handleDragOver(event) {
@@ -125,6 +128,10 @@ function handleDragEnter(event) {
   const columnBody = event.target.closest(".column__body");
 
   if (!columnBody) {
+    return;
+  }
+
+  if (columnBody.classList.contains("column__body--drop-disabled")) {
     return;
   }
 
@@ -165,12 +172,20 @@ function handleDrop(event) {
     return;
   }
 
+  if (columnBody.classList.contains("column__body--drop-disabled")) {
+    clearDropZoneStates();
+    alert("Essa movimentação não é permitida.");
+    renderBoard();
+    return;
+  }
+
   const result = moveTask(taskId, nextStatus);
 
   if (!result.success) {
     alert(result.message);
   }
 
+  clearDropZoneStates();
   renderBoard();
 }
 
@@ -179,6 +194,45 @@ function clearDropHighlights() {
 
   highlightedColumns.forEach((column) => {
     column.classList.remove("column__body--drag-over");
+  });
+}
+
+function clearDropZoneStates() {
+  const columnBodies = document.querySelectorAll(".column__body");
+
+  columnBodies.forEach((columnBody) => {
+    columnBody.classList.remove("column__body--drop-valid");
+    columnBody.classList.remove("column__body--drop-disabled");
+  });
+}
+
+function applyDropZoneStates(taskId) {
+  const tasks = getTasks();
+  const task = tasks.find((currentTask) => currentTask.id === taskId);
+
+  if (!task) {
+    return;
+  }
+
+  const columnBodies = document.querySelectorAll(".column__body");
+
+  columnBodies.forEach((columnBody) => {
+    const nextStatus = columnBody.dataset.columnBody;
+
+    if (!nextStatus) {
+      return;
+    }
+
+    if (task.status === nextStatus) {
+      columnBody.classList.add("column__body--drop-valid");
+      return;
+    }
+
+    if (canMoveTask(task.status, nextStatus)) {
+      columnBody.classList.add("column__body--drop-valid");
+    } else {
+      columnBody.classList.add("column__body--drop-disabled");
+    }
   });
 }
 

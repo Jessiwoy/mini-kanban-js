@@ -14,7 +14,7 @@ export function getInitialTheme() {
 
 export function applyTheme(theme) {
   document.body.setAttribute("data-theme", theme);
-  updateThemeToggleLabel(theme);
+  updateThemeToggleState(theme);
 }
 
 export function toggleTheme() {
@@ -30,16 +30,19 @@ export function initializeTheme() {
   applyTheme(initialTheme);
 }
 
-export function updateThemeToggleLabel(theme) {
+export function updateThemeToggleState(theme) {
   const themeToggleButton = document.querySelector(".theme-toggle");
 
   if (!themeToggleButton) {
     return;
   }
 
-  themeToggleButton.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+  const isLightTheme = theme === "light";
+
   themeToggleButton.setAttribute(
     "aria-label",
-    theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
+    isLightTheme ? "Ativar tema escuro" : "Ativar tema claro"
   );
+
+  themeToggleButton.setAttribute("aria-pressed", String(isLightTheme));
 }
