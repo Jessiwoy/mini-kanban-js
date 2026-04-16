@@ -20,6 +20,7 @@ export function createTask(title) {
   const newTask = {
     id: generateId(),
     title: sanitizeText(title),
+    note: "",
     status: TASK_STATUS.TODO,
     createdAt: new Date().toISOString(),
   };
@@ -33,7 +34,7 @@ export function createTask(title) {
   };
 }
 
-export function editTask(taskId, newTitle) {
+export function editTask(taskId, newTitle, newNote) {
   if (!isValidTaskTitle(newTitle)) {
     return {
       success: false,
@@ -43,6 +44,7 @@ export function editTask(taskId, newTitle) {
 
   updateTask(taskId, {
     title: sanitizeText(newTitle),
+    note: sanitizeText(newNote),
   });
 
   saveTasks(getTasks());

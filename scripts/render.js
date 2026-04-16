@@ -28,7 +28,7 @@ function renderColumn(status, tasks) {
 
   if (filteredTasks.length === 0) {
     columnBody.innerHTML = `
-      <p class="empty-state">Nenhuma tarefa em ${COLUMN_TITLES[status]}.</p>
+      <p class="empty-state">Nenhuma tarefa por aqui.</p>
     `;
   } else {
     filteredTasks.forEach((task) => {
@@ -48,6 +48,9 @@ function createTaskCard(task) {
   article.dataset.taskId = task.id;
   article.draggable = task.status !== TASK_STATUS.DONE;
 
+  const shouldShowNote =
+    task.status === TASK_STATUS.TODO || Boolean(task.note);
+
   if (task.status === TASK_STATUS.DONE) {
     article.classList.add("task-card--done");
   }
@@ -55,6 +58,11 @@ function createTaskCard(task) {
   article.innerHTML = `
     <div class="task-card__content">
       <h3 class="task-card__title">${task.title}</h3>
+      ${
+        shouldShowNote
+          ? `<p class="task-card__note">${task.note || "Sem observações por enquanto."}</p>`
+          : ""
+      }
     </div>
 
     <div class="task-card__actions">
@@ -74,6 +82,9 @@ export function createEditForm(task) {
   article.innerHTML = `
     <form class="task-edit-form">
       <input type="text" value="${task.title}" />
+
+      <textarea placeholder="Observação (opcional)">${task.note || ""}</textarea>
+
       <div class="task-card__actions">
         <button type="submit">Salvar</button>
         <button type="button" data-action="cancel">Cancelar</button>

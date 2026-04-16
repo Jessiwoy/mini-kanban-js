@@ -188,19 +188,19 @@ body[data-theme="light"] .task-form button {
   color: #2d2438;
 }
 
-.task-form input:focus,
-.task-edit-form input:focus {
+.task-edit-form input:focus,
+.task-edit-form textarea:focus {
   outline: none;
 }
 
-body[data-theme="dark"] .task-form input:focus,
-body[data-theme="dark"] .task-edit-form input:focus {
+body[data-theme="dark"] .task-edit-form input:focus,
+body[data-theme="dark"] .task-edit-form textarea:focus {
   border-color: rgba(198, 168, 255, 0.65);
   box-shadow: 0 0 0 4px rgba(198, 168, 255, 0.12);
 }
 
-body[data-theme="light"] .task-form input:focus,
-body[data-theme="light"] .task-edit-form input:focus {
+body[data-theme="light"] .task-edit-form input:focus,
+body[data-theme="light"] .task-edit-form textarea:focus {
   border-color: rgba(177, 140, 255, 0.55);
   box-shadow: 0 0 0 4px rgba(177, 140, 255, 0.12);
 }
@@ -591,3 +591,36 @@ body[data-theme="light"] .theme-toggle__icon--moon {
     min-height: 340px;
   }
 }
+
+.task-card__note {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+body[data-theme="dark"] .task-card__note {
+  color: var(--dark-text-muted);
+}
+
+body[data-theme="light"] .task-card__note {
+  color: var(--light-text-muted);
+}
+
+.task-edit-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  resize: vertical;
+  min-height: 70px;
+}
+
+body[data-theme="dark"] .task-edit-form textarea {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--dark-text);
+}
+
+body[data-theme="light"] .task-edit-form textarea {
+  background-color: #f5effb;
+  color: var(--light-text);
+  border: 1px solid rgba(177, 140, 255, 0.18);
+}
+

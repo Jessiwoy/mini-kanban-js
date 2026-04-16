@@ -73,12 +73,17 @@ function handleEditSubmit(event) {
 
   const form = event.target;
   const input = form.querySelector("input");
+  const textarea = form.querySelector("textarea");
   const card = form.closest(".task-card");
 
   if (!input || !card) return;
 
   const taskId = card.dataset.taskId;
-  const result = editTask(taskId, input.value);
+  const result = editTask(
+    taskId,
+    input.value,
+    textarea ? textarea.value : ""
+  );
 
   if (!result.success) {
     alert(result.message);
