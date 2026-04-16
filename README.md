@@ -95,7 +95,7 @@ mini-kanban-js/
 ▶️ Como executar o projeto
 
 Clone o repositório:
-git clone https://github.com/seu-usuario/mini-kanban-js.git
+git clone https://github.com/Jessiwoy/mini-kanban-js.git
 Acesse a pasta:
 cd mini-kanban-js
 Abra o arquivo index.html no navegador
